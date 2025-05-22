@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Hospitality</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+</head>
+<body>
+    <header class="text-center">
+        <h1>Welcome to E-Hospitality</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Doctors</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="d-flex flex-row mt-5">
+        <section id="hospital-info">
+            <h2>About Our Hospital</h2>
+            <p>We are committed to providing exceptional healthcare services, ensuring comfort, safety, and expert medical care.</p>
+            <p><strong>Location:</strong> 123 Health Street, Cityville</p>
+            <p><strong>Contact:</strong> +91 98765 43210 | email@ehospitality.com</p>
+        </section>
+
+        <section id="doctors-list">
+            <h2>Meet Our Expert Doctors</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Specialization</th>
+                        <th>Position</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dr. Aditi Verma</td>
+                        <td>Cardiology</td>
+                        <td>Senior Consultant</td>
+                    </tr>
+                    <tr>
+                        <td>Dr. Rahul Mehta</td>
+                        <td>Neurology</td>
+                        <td>Chief Neurologist</td>
+                    </tr>
+                    <tr>
+                        <td>Dr. Kavita Singh</td>
+                        <td>Pediatrics</td>
+                        <td>Head of Pediatrics</td>
+                    </tr>
+                    <tr>
+                        <td>Dr. Vikas Sharma</td>
+                        <td>Orthopedics</td>
+                        <td>Consultant Surgeon</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Hero Section -->
+    <div class="moto">
+        <div class="hero-contents">
+            <h2>Your Health, Our Priority</h2>
+            <p>Experience top-tier hospitality and medical care with our expert professionals.</p>
+            <a href="#" class="book-btn">Book an Appointment</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 E-Hospitality. All rights reserved.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</body>
+</html>

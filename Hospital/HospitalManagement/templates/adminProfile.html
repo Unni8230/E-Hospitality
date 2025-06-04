@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static 'adminprofile.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1 class="title">Admin Dashboard</h1>
+        <nav>
+            <ul class="admin-menu">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Appointments</a></li>
+                <li><a href="#">Doctors</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+        <!-- Doctors Section -->
+        <section class="card">
+            <h2>Doctors</h2>
+            <ul>
+                {% for doctor in doctors %}
+                    <li class="doctor-card">{{ doctor.doctor_name }} - {{ doctor.specialization }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <!-- Appointments Section -->
+        <section class="card">
+            <h2>Appointments</h2>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Doctor</th>
+                        <th>Patient</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                        <tr>
+                            <td>{{ appointment.doctor.doctor_name }}</td>
+                            <td>{{ appointment.user.username }}</td>
+                            <td>{{ appointment.date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Patients Section -->
+        <section class="card">
+            <h2>Patients</h2>
+            <ul>
+                {% for patient in patients %}
+                    <li class="patient-card">{{ patient.username }} - {{ patient.disease }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+
+    <!-- Smooth Page Transition -->
+    <script>
+        $(document).ready(function(){
+            $(".card").fadeIn(800);
+        });
+    </script>
+</body>
+</html>

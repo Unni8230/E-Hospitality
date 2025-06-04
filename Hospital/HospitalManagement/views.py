@@ -59,3 +59,60 @@ def registerUser(request):
                 messages.success(request,"Registration Succesful, Please Login")
                 return redirect('login')
     return render(request,'registerUser.html')
+
+def userProfile(request):
+    if "user_id" not in request.session:
+        return redirect('login')
+    else:
+        user = Credentials.objects.get(id=request.session['user_id'])
+        appointments = Appointments.objects.filter(user=user)
+        doctors = Doctor.objects.all()
+        if request.method == "POST":
+            doctor_id = request.POST['doctor']
+            date = request.POST['date']
+            time = request.POST['time']
+            doctor = Doctor.objects.get(id=doctor_id)
+            Appointments.objects.create(user=user,doctor=doctor,date=date,time=time)
+            messages.success(request,"Appointment Booked Successfully")
+            return redirect('userprofile')
+
+    return render(request,'userProfile.html', {"user": user, "appointments": appointments, "doctors": doctors})
+
+def doctorProfile(request):
+    if "user_id" not in request.session:
+        return redirect('login')
+    else:
+        user = Credentials.objects.get(id=request.session['user_id'])
+        doctor = Doctor.objects.get(doctor_name=user.name)
+
+        query = """SELECT * FROM Hospital_Appointments inner join Hospital_PatientRecords 
+        on Hospital_Appointments.user_id = Hospital_PatientRecords.username_id 
+        inner join Hospital_Credentials on Hospital_Appointments.user_id = Hospital_Credentials.id
+        where Hospital_Appointments.doctor_id = %s """
+        
+        patients = Appointments.objects.raw(query,[doctor.id])
+    
+    return render(request, "doctorProfile.html", {
+        "doctor": doctor,
+        "patients":patients
+    })
+def logout(request):
+    request.session.flush()
+    return redirect('login')
+
+def adminProfile(request):
+    if "user_id" not in request.session:
+        return redirect('login')
+    else:
+        user = Credentials.objects.get(id=request.session['user_id'])
+        doctors = Doctor.objects.all()
+        appointments = Appointments.objects.select_related("doctor").all()
+        patients = PatientRecords.objects.all()
+
+        context = {
+            "doctors": doctors,
+            "appointments": appointments,
+            "patients": patients
+        }
+
+    return render(request,'adminProfile.html', context)
